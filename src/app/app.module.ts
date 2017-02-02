@@ -13,13 +13,15 @@ import { AuthService }      from './auth.service';
 import { PrivadoComponent }     from './privado/privado.component';
 import { CanDeactivateGuard }       from './can-deactivate-guard.service';
 import { AuthGuard }                from './auth-guard.service';
+import { HttpModule }    from '@angular/http';
 
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule,
   ],
   declarations: [
     AppComponent,
