@@ -10,7 +10,9 @@ import { HomeComponent }     from './home/home.component';
 import { PageNotFoundComponent }    from './not-found.component';
 import { LoginComponent }     from './login/login.component';
 import { AuthService }      from './auth.service';
-
+import { PrivadoComponent }     from './privado/privado.component';
+import { CanDeactivateGuard }       from './can-deactivate-guard.service';
+import { AuthGuard }                from './auth-guard.service';
 
 
 @NgModule({
@@ -23,10 +25,11 @@ import { AuthService }      from './auth.service';
     AppComponent,
     HomeComponent,
     PageNotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    PrivadoComponent
     
   ],
-  providers: [AuthService ],
+  providers: [AuthService, AuthGuard, CanDeactivateGuard ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
