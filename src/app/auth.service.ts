@@ -10,10 +10,17 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthService {
 
-constructor(private http: Http) { }
+public token: string;
+private Url = 'http://localhost:51098/login';
+constructor(private http: Http) {
+
+   var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        
+        this.token = currentUser && currentUser.token;
+ }
  
  
- private Url = 'http://localhost:51098/login';
+ 
  
  
 
@@ -32,11 +39,31 @@ constructor(private http: Http) { }
    
   var user = {
           username:'jdesande',
-          password : 'jasjas'
+          password : '123456'
         };
     return this.http
                .post(this.Url,JSON.stringify(user),options)
-               .map(response => this.isLoggedIn = true);
+                .map((response: Response) => {
+                // login successful if there's a jwt token in the response
+                let token = response.json() && response.json().Security  &&  response.json().Security.token;
+                if (token) {
+                    // set token property
+                    this.token = token;
+                    this.isLoggedIn = true;
+ 
+                    // store username and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem('currentUser', JSON.stringify({ username: user.username, token: token }));
+ 
+                    // return true to indicate successful login
+                    return true;
+                } else {
+                    // return false to indicate failed login
+                    this.isLoggedIn = false;
+                    return false;
+                    
+                }
+            });
+              
     
   }
 
