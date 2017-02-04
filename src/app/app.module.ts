@@ -8,12 +8,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent }          from './app.component';
 import { HomeComponent }     from './home/home.component';
 import { PageNotFoundComponent }    from './not-found.component';
+import { PageNotAuthComponent }    from './not-auth.component';
 import { LoginComponent }     from './login/login.component';
 import { AuthService }      from './auth.service';
 import { PrivadoComponent }     from './privado/privado.component';
-import { CanDeactivateGuard }       from './can-deactivate-guard.service';
-import { AuthGuard }                from './auth-guard.service';
+import { CanDeactivateGuard }       from './_guard/can-deactivate-guard.service';
+import { AuthGuard }                from './_guard/auth-guard.service';
+import { AdminGuard }                from './_guard/admin-guard.service';
 import { HttpModule }    from '@angular/http';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -27,11 +30,13 @@ import { HttpModule }    from '@angular/http';
     AppComponent,
     HomeComponent,
     PageNotFoundComponent,
+    PageNotAuthComponent,
     LoginComponent,
-    PrivadoComponent
+    PrivadoComponent,
+    AdminComponent
     
   ],
-  providers: [AuthService, AuthGuard, CanDeactivateGuard ],
+  providers: [AuthService, AuthGuard,AdminGuard, CanDeactivateGuard ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

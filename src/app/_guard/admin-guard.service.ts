@@ -7,10 +7,10 @@ import {
   NavigationExtras,
   CanLoad, Route
 }                           from '@angular/router';
-import { AuthService }      from './auth.service';
+import { AuthService }      from '../auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
+export class AdminGuard implements CanActivate, CanActivateChild, CanLoad {
  
   constructor(private authService: AuthService, private router: Router) {
      
@@ -18,9 +18,15 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    let url: string = state.url;
+    
+    if(this.authService.userConnect && this.authService.userConnect.esAdmin())
+      return true;
 
-    return this.checkLogin(url);
+    this.router.navigate(['/no-auth']);
+
+
+
+    
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {

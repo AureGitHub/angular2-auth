@@ -2,13 +2,17 @@
   Aure ROUTER
 </h1>
 <h1>
-  <div *ngIf="conectado()">Está conetado {{authService.userConnect.name}}</div>
+  <div *ngIf="conectado()">
+    <div>Está conetado {{authService.userConnect.name}}</div>
+    <div><button (click)="logout()" *ngIf="this.authService.isLoggedIn">Logout</button></div>
+  </div>
   <div *ngIf="esAdmin()">Es ADMIN</div> 
 </h1>
  <nav>
     <a routerLink="/login" routerLinkActive="active">login</a>         
       <a routerLink="/inicio" routerLinkActive="active">Inicio</a>    
       <a routerLink="/privado" routerLinkActive="active">privado</a>    
+      <a routerLink="/admin" routerLinkActive="active">admin</a>  
 </nav>
 
 

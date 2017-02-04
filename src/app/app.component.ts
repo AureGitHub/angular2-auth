@@ -18,6 +18,11 @@ export class AppComponent {
     return this.authService.isLoggedIn;
   }
 
+   logout() {
+    this.authService.logout();
+    
+  }
+
   esAdmin():boolean{
     return this.authService.userConnect && this.authService.userConnect.idRol==1;}
 
