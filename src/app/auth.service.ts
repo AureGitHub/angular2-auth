@@ -18,10 +18,9 @@ private Url = 'http://localhost:51098/login';
 
  private localStorage_currentUser = 'currentUser';
  
- private userConnect : User =null;
+ public userConnect : User =null;
 
  isLoggedIn:boolean = false;
- 
 
 
   // store the URL so we can redirect after logging in
@@ -29,12 +28,20 @@ private Url = 'http://localhost:51098/login';
 
 
 constructor(private http: Http) {
-
-   var currentUser = JSON.parse(localStorage.getItem(this.localStorage_currentUser));
-        
-        this.token = currentUser && currentUser.token;
  }
- 
+
+ SetEntornoUser(){
+    if(this.userConnect)
+    {
+       this.isLoggedIn = true;
+      
+    }
+    else{
+       this.isLoggedIn = false;
+      
+    }
+  
+ } 
 
   login(): Observable<boolean> {
   let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -42,8 +49,8 @@ constructor(private http: Http) {
 
    
   var user = {
-          username:'aalonso',
-          password : '123456'
+          username:'jdesande',
+          password : '123456' 
         };
     return this.http
                .post(this.Url,JSON.stringify(user),options)
@@ -53,25 +60,27 @@ constructor(private http: Http) {
                 if (token) {
                     // set token property
                     this.token = token;
-                    this.isLoggedIn = true;
-
-                    this.userConnect  = { 
-                      id :  response.json().Security.user.id,
-                      username :  response.json().Security.user.username,
-                      idRol :  response.json().Security.user.IdRol,
-                      name :  response.json().Security.user.Nombre,
-                      expires: response.json().Security.expires,
-                      token: response.json().Security.token
-                    };
+                   
+                    this.userConnect  =new User(
+                      response.json().Security.user.id,
+                      response.json().Security.user.username,
+                      response.json().Security.user.Nombre,
+                      response.json().Security.user.IdRol,
+                      
+                      response.json().Security.expires,
+                      response.json().Security.token
+                    );
  
                     // store username and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(this.userConnect));
+
+                    this.SetEntornoUser();
  
                     // return true to indicate successful login
                     return true;
                 } else {
                     // return false to indicate failed login
-                    this.isLoggedIn = false;
+                   
                     return false;
                     
                 }
@@ -80,25 +89,23 @@ constructor(private http: Http) {
     
   }
 
-  esAdmin():boolean{
-    return this.userConnect && this.userConnect.idRol==1;
-  }
+ 
 
   logout(): void {
     this.isLoggedIn = false;
     localStorage.removeItem(this.localStorage_currentUser);
+    this.userConnect=null;
+     this.SetEntornoUser();
   }
 
   reload():void{
     if(localStorage.getItem(this.localStorage_currentUser)){
       this.userConnect=JSON.parse(localStorage.getItem(this.localStorage_currentUser));
-      this.isLoggedIn = true;
-
     }
     else{
-      this.isLoggedIn = false;
       this.userConnect=null;
     }
+    this.SetEntornoUser();
   }
 }
 

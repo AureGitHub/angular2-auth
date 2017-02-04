@@ -18,9 +18,8 @@ export class AppComponent {
     return this.authService.isLoggedIn;
   }
 
-   esAdmin() : boolean {
-    return this.authService.esAdmin();
-  }
+  esAdmin():boolean{
+    return this.authService.userConnect && this.authService.userConnect.idRol==1;}
 
   title = 'app works!';
 }
