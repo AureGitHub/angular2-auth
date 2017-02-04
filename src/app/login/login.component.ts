@@ -8,14 +8,15 @@ import { AuthService }      from '../auth.service';
     <h2>LOGIN</h2>
     <p>{{message}}</p>
     <p>
-      <button (click)="login()"  *ngIf="!authService.isLoggedIn">Login</button>
-      <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+      <button (click)="login()"  *ngIf="!this.authService.isLoggedIn">Login</button>
+      <button (click)="logout()" *ngIf="this.authService.isLoggedIn">Logout</button>
     </p>`
 })
 export class LoginComponent {
   message: string;
 
   constructor(public authService: AuthService, public router: Router) {
+
     this.setMessage();
   }
 

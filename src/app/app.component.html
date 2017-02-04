@@ -1,6 +1,10 @@
 <h1>
   Aure ROUTER
 </h1>
+<h1>
+  <div *ngIf="conectado()">Está conetado</div>
+  <div *ngIf="esAdmin()">Es ADMIN</div>
+</h1>
  <nav>
     <a routerLink="/login" routerLinkActive="active">login</a>         
       <a routerLink="/inicio" routerLinkActive="active">Inicio</a>    

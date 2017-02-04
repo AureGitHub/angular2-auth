@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService }      from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+
+  constructor(public authService: AuthService){
+     
+       authService.reload();
+  }
+
+  conectado() : boolean {
+    return this.authService.isLoggedIn;
+  }
+
+   esAdmin() : boolean {
+    return this.authService.esAdmin();
+  }
+
   title = 'app works!';
 }

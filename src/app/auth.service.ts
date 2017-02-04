@@ -7,30 +7,34 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/map';
 
+
+import { User } from './_models/user';
+
 @Injectable()
 export class AuthService {
 
 public token: string;
 private Url = 'http://localhost:51098/login';
-constructor(private http: Http) {
 
-   var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        
-        this.token = currentUser && currentUser.token;
- }
+ private localStorage_currentUser = 'currentUser';
  
- 
- 
- 
+ private userConnect : User =null;
+
+ isLoggedIn:boolean = false;
  
 
-  isLoggedIn: boolean = false;
 
   // store the URL so we can redirect after logging in
   redirectUrl: string;
 
 
+constructor(private http: Http) {
 
+   var currentUser = JSON.parse(localStorage.getItem(this.localStorage_currentUser));
+        
+        this.token = currentUser && currentUser.token;
+ }
+ 
 
   login(): Observable<boolean> {
   let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -38,7 +42,7 @@ constructor(private http: Http) {
 
    
   var user = {
-          username:'jdesande',
+          username:'aalonso',
           password : '123456'
         };
     return this.http
@@ -50,9 +54,18 @@ constructor(private http: Http) {
                     // set token property
                     this.token = token;
                     this.isLoggedIn = true;
+
+                    this.userConnect  = { 
+                      id :  response.json().Security.user.id,
+                      username :  response.json().Security.user.username,
+                      idRol :  response.json().Security.user.IdRol,
+                      name :  response.json().Security.user.Nombre,
+                      expires: response.json().Security.expires,
+                      token: response.json().Security.token
+                    };
  
                     // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify({ username: user.username, token: token }));
+                    localStorage.setItem('currentUser', JSON.stringify(this.userConnect));
  
                     // return true to indicate successful login
                     return true;
@@ -67,8 +80,25 @@ constructor(private http: Http) {
     
   }
 
+  esAdmin():boolean{
+    return this.userConnect && this.userConnect.idRol==1;
+  }
+
   logout(): void {
     this.isLoggedIn = false;
+    localStorage.removeItem(this.localStorage_currentUser);
+  }
+
+  reload():void{
+    if(localStorage.getItem(this.localStorage_currentUser)){
+      this.userConnect=JSON.parse(localStorage.getItem(this.localStorage_currentUser));
+      this.isLoggedIn = true;
+
+    }
+    else{
+      this.isLoggedIn = false;
+      this.userConnect=null;
+    }
   }
 }
 
