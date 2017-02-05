@@ -2,33 +2,40 @@ import { Component }        from '@angular/core';
 import { Router,
          NavigationExtras } from '@angular/router';
 import { AuthService }      from '../auth.service';
+import { User } from '../_models/user';
+import 'rxjs/add/observable/throw';
 
 @Component({
-  template: `
-    <h2>LOGIN</h2>
-    <p>{{message}}</p>
-    <p>
-      <button class='btn btn-success' (click)="login()"  *ngIf="!this.authService.isLoggedIn">Login</button>
-     
-    </p>`
+ templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  message: string;
+ 
+ public errorMessage:string;
 
   constructor(public authService: AuthService, public router: Router) {
 
-    this.setMessage();
+    
+   
   }
 
-  setMessage() {
-    this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
-  }
+public model = new User(null,null,null,null,null,null);
+ comoNoAdmin(){
+    this.model.username='aalvare9';
+   this.model.password='123456';
+ }
 
-  login() {
-    this.message = 'Trying to log in ...';
+ comoAdmin(){
+   this.model.username='jdesande';
+   this.model.password='123456';
+ }
 
-    this.authService.login().subscribe(() => {
-      this.setMessage();
+  onSubmit() {
+    
+
+    this.authService.login(this.model.username,this.model.password).subscribe(
+    
+       TodoOK=> {
+      
       if (this.authService.isLoggedIn) {
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
@@ -44,7 +51,9 @@ export class LoginComponent {
         // Redirect the user
         this.router.navigate([redirect], navigationExtras);
       }
-    });
+    },
+    error => this.errorMessage = <any>error
+    );
   }
 
  

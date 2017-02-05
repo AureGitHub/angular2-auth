@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/delay';
+
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 
 import { User } from './_models/user';
@@ -30,7 +29,7 @@ private Url = 'http://localhost:51098/login';
 constructor(private http: Http) {
  }
 
- SetEntornoUser(){
+SetEntornoUser(){
     if(this.userConnect)
     {
        this.isLoggedIn = true;
@@ -43,20 +42,14 @@ constructor(private http: Http) {
   
  } 
 
-  login(): Observable<boolean> {
+  login(username : string,password:string): Observable<boolean> {
   let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-   
-  var user = {
-          username:'aaranzue',
-          password : '123456' 
-        };
     return this.http
-               .post(this.Url,JSON.stringify(user),options)
+               .post(this.Url,JSON.stringify({username:username,password : password}),options)
                 .map((response: Response) => {
-                // login successful if there's a jwt token in the response
-                let token = response.json() && response.json().Security  &&  response.json().Security.token;
+                   let token = response.json() && response.json().Security  &&  response.json().Security.token;
                 if (token) {
                     // set token property
                     this.token = token;
@@ -74,7 +67,7 @@ constructor(private http: Http) {
                     // store username and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(this.userConnect));
 
-                    this.SetEntornoUser();
+                  this.SetEntornoUser();
  
                     // return true to indicate successful login
                     return true;
@@ -84,11 +77,27 @@ constructor(private http: Http) {
                     return false;
                     
                 }
-            });
+
+                })
+                .catch(this.handleError);
               
     
   }
 
+
+
+ private handleError (error: Response | any) {
+   let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+   this.isLoggedIn = false;
+    return Observable.throw(errMsg);
+  }
  
 
   logout(): void {

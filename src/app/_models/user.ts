@@ -1,25 +1,16 @@
 export class User {
 
+ 
     constructor(
-    _id: number,
-    _username: string,
-    _name: string,
-    _idRol: number,
-    _expires: number,
-    _token: string) {
-        this.id=_id;
-        this.username=_username;
-        this.name=_name;
-        this.idRol=_idRol;
-        this.expires=_expires;
-        this.token=_token;
+    public id: number,
+    public username: string,
+    public name: string,
+    public idRol: number,
+    public expires: number,
+    public token: string) {
+       
    }
-    id: number;
-    username: string;
-    name: string;
-    idRol: number;
-    expires: number;
-    token: string;
+    public password: string
     public esAdmin() : boolean{return this.idRol==1};
    
 }
