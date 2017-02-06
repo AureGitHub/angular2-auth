@@ -19,6 +19,12 @@ export class AdminGuard implements CanActivate, CanActivateChild, CanLoad {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     
+    if(!this.authService.userConnect){
+      this.router.navigate(['/login']);
+      return false;
+      
+    }
+
     if(this.authService.userConnect && this.authService.userConnect.esAdmin())
       return true;
 
