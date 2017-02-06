@@ -13,7 +13,8 @@ import { User } from './_models/user';
 export class AuthService {
 
 public token: string;
-private Url = 'http://localhost:51098/login';
+//private Url = 'http://localhost:51098/login';
+private Url = 'https://euromillones-angular-node-auregithub.c9users.io/login';
 
  private localStorage_currentUser = 'currentUser';
  
