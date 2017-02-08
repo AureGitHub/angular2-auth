@@ -9,14 +9,17 @@ import { AppComponent }          from './app.component';
 import { HomeComponent }     from './home/home.component';
 import { PageNotFoundComponent }    from './not-found.component';
 import { PageNotAuthComponent }    from './not-auth.component';
-import { LoginComponent }     from './login/login.component';
+
 import { AuthService }      from './auth.service';
-import { PrivadoComponent }     from './privado/privado.component';
+
 import { CanDeactivateGuard }       from './_guard/can-deactivate-guard.service';
 import { AuthGuard }                from './_guard/auth-guard.service';
-import { AdminGuard }                from './_guard/admin-guard.service';
-import { HttpModule }    from '@angular/http';
-import { AdminComponent } from './admin/admin.component';
+
+import { HttpModule }    from '@angular/http'
+import { LoginModule} from './login/login.module'
+import { AdminModule} from './admin/admin.module'
+import { PrivadoModule} from './privado/privado.module'
+
 
 
 @NgModule({
@@ -25,18 +28,18 @@ import { AdminComponent } from './admin/admin.component';
     FormsModule,
     AppRoutingModule,
     HttpModule,
+    LoginModule,
+    AdminModule,
+    PrivadoModule
   ],
   declarations: [
     AppComponent,
     HomeComponent,
     PageNotFoundComponent,
-    PageNotAuthComponent,
-    LoginComponent,
-    PrivadoComponent,
-    AdminComponent
+    PageNotAuthComponent
     
   ],
-  providers: [AuthService, AuthGuard,AdminGuard, CanDeactivateGuard ],
+  providers: [AuthService, AuthGuard, CanDeactivateGuard ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

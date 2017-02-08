@@ -12,6 +12,9 @@ export class LoginComponent {
  
  public errorMessage:string;
 
+VerBoton :boolean = true;
+
+
   constructor(public authService: AuthService, public router: Router) {
 
     
@@ -30,7 +33,8 @@ public model = new User(null,null,null,null,null,null);
  }
 
   onSubmit() {
-    
+    this.errorMessage ="";
+    this.VerBoton = false;
 
     this.authService.login(this.model.username,this.model.password).subscribe(
     
@@ -52,7 +56,10 @@ public model = new User(null,null,null,null,null,null);
         this.router.navigate([redirect], navigationExtras);
       }
     },
-    error => this.errorMessage = <any>error
+    error => {
+      this.VerBoton = true;
+      this.errorMessage = <any>error
+    }
     );
   }
 
