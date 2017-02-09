@@ -7,6 +7,7 @@ import 'rxjs/add/observable/throw';
 
 @Component({
  templateUrl: './login.component.html',
+ styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
  
@@ -35,6 +36,11 @@ public model = new User(null,null,null,null,null,null);
   onSubmit() {
     this.errorMessage ="";
     this.VerBoton = false;
+
+  this.router.navigate(['inicio']);
+
+  return;
+
 
     this.authService.login(this.model.username,this.model.password).subscribe(
     
