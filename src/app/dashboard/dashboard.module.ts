@@ -23,7 +23,7 @@ import {SidebarComponent} from '../shared/index';
 import { DashboardComponent } from './dashboard.component';
 
 import { PrivadoModule } from './privado/privado.module';
-
+import {TopNavComponent} from '../shared/topnav/topnav';
 
 
 @NgModule({
@@ -33,8 +33,8 @@ import { PrivadoModule } from './privado/privado.module';
         PrivadoModule
     
     ],
-    declarations: [DashboardComponent],
-    exports: [DashboardComponent]
+    declarations: [DashboardComponent,TopNavComponent],
+    exports: [DashboardComponent,TopNavComponent]
 })
 
 export class DashboardModule { }
