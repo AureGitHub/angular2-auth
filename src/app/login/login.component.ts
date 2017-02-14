@@ -41,7 +41,7 @@ public model = new User(null,null,null,null,null,null);
 
   return;
 
-
+/*
     this.authService.login(this.model.username,this.model.password).subscribe(
     
        TodoOK=> {
@@ -66,7 +66,7 @@ public model = new User(null,null,null,null,null,null);
       this.VerBoton = true;
       this.errorMessage = <any>error
     }
-    );
+    );*/
   }
 
  

@@ -3,7 +3,7 @@ import { BrowserModule }        from '@angular/platform-browser';
 import { FormsModule }          from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
+import { routes } from './app-routing.module';
 
 import { AppComponent }          from './app.component';
 import { HomeComponent }     from './home/home.component';
@@ -18,19 +18,19 @@ import { AuthGuard }                from './_guard/auth-guard.service';
 import { HttpModule }    from '@angular/http'
 import { LoginModule} from './login/login.module'
 import { AdminModule} from './admin/admin.module'
-import { PrivadoModule} from './privado/privado.module'
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
-    AppRoutingModule,
+    FormsModule,    
     HttpModule,
+    RouterModule.forRoot(routes),
     LoginModule,
     AdminModule,
-    PrivadoModule
+    DashboardModule
   ],
   declarations: [
     AppComponent,
