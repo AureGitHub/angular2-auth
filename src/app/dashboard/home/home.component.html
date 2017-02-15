@@ -1,11 +1,80 @@
 <div class="container-fluid">
-    <h2 class="text-muted">Dashboard <small>Statistics Overview</small></h2>
-    
+    <h2 class="text-muted">Home <small>Prueba de componentes</small></h2>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>{{title}}</h1>
+            <button kendoButton (click)="onButtonClick()" [primary]="true">My Kendo UI Button</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+             <div class="example-wrapper" style="min-height: 400px;">
+      <div class="col-xs-12 col-sm-6 example-col">
+        <p>AutoComplete</p>
+        <kendo-autocomplete [data]="listItems" [placeholder]="'Your favorite sport'">
+        </kendo-autocomplete>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 example-col">
+        <p>ComboBox</p>
+        <kendo-combobox [data]="listItems" [value]="'Basketball'">
+        </kendo-combobox>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 example-col">
+        <p>DropDownList</p>
+        <kendo-dropdownlist [data]="listItems" [value]="'Basketball'">
+        </kendo-dropdownlist>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 example-col">
+        <p>MultiSelect</p>
+        <kendo-multiselect [data]="listItems" [value]="value" [placeholder]="'Your favorite sports'"></kendo-multiselect>
+      </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <kendo-grid [data]="gridView" 
+             [pageSize]="pageSize"
+                                    [skip]="skip"
+                                    [pageable]="{
+                                                    buttonCount: buttonCount,
+                                                    info: info,
+                                                    type: type,
+                                                    previousNext: previousNext
+                                                  }"
+                                    [scrollable]="'none'"
+                                    [height]="260"
+                                    [rowHeight]="36"
+                                    (pageChange)="pageChange($event)"
+                                    >
+                <kendo-grid-column field="ProductID" title="ID" width="40">
+                </kendo-grid-column>
+                <kendo-grid-column field="ProductName" title="Name" width="250">
+                </kendo-grid-column>
+                <kendo-grid-column field="Category.CategoryName" title="Category">
+                </kendo-grid-column>
+                <kendo-grid-column field="UnitPrice" title="Price" width="80">
+                </kendo-grid-column>
+                <kendo-grid-column field="UnitsInStock" title="In stock" width="80">
+                </kendo-grid-column>
+                <kendo-grid-column field="Discontinued" title="Discontinued" width="120">
+                    <template kendoGridCellTemplate let-dataItem>
+                        <input type="checkbox" [checked]="dataItem.Discontinued" disabled/>
+                    </template>
+                </kendo-grid-column>
+            </kendo-grid>
+        </div>
+    </div>
+    <hr>
     <div class="row">
         <div class="col-md-12">
             <carousel [interval]="myInterval" [noWrap]="noWrapSlides">
                 <slide *ngFor="let slidez of slides;let index=index" [active]="slidez.active">
-                    <img [src]="slidez.image"> 
+                    <img [src]="slidez.image">
                     <div class="carousel-caption">
                         <h4>Slide {{index}}</h4>
                         <p>{{slidez.text}}</p>
@@ -16,7 +85,7 @@
             </carousel>
         </div>
     </div>
-   
+
     <hr>
 
 
@@ -79,14 +148,14 @@
                     </div>
                 </div>
                 <div class="card-footer card-yellow">
-                    <a  class="text-warning" href="javascript:void(0);">
+                    <a class="text-warning" href="javascript:void(0);">
                         <span class="pull-xs-left">View Details</span>
                         <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </a>
                 </div>
             </div>
-        </div> 
+        </div>
         <div class="col-xl-3 col-lg-6">
             <div class="card card-danger card-inverse">
                 <div class="card-header card-danger">
@@ -110,36 +179,39 @@
             </div>
         </div>
     </div>
-  
+
     <alert *ngFor="let alert of alerts; let i = index" [type]="alert.type" dismissible="true" (close)="closeAlert(i)">
         {{ alert?.msg }}
     </alert>
 
 
-<div class="row">
-	<div class="col-sm-12">
-		<div class="card card-block">
-			<h4 class="card-title">Modal</h4>
-			<!-- Large modal -->
-			<button class="btn btn-primary" (click)="lgModal.show()">Large modal</button>
-			<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-			    <div class="modal-dialog">
-			        <div class="modal-content">
-			            <div class="modal-header">
-			                <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-block">
+                <h4 class="card-title">Modal</h4>
+                <!-- Large modal -->
+                <button class="btn btn-primary" (click)="lgModal.show()">Large modal</button>
+                <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
 			                    <span aria-hidden="true">&times;</span>
 			                </button>
-			                <h5 class="modal-title">Large modal</h5>
-			            </div>
-			            <div class="modal-body">
-			                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae accusantium maiores, placeat, quasi laborum in vitae accusamus veritatis inventore nulla et quibusdam debitis ipsam consectetur eum, velit ea praesentium!
-			                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum nostrum a velit esse est, voluptatum quam eos ipsum laudantium facere iusto. Provident deleniti non temporibus ex tenetur, assumenda labore eos!
-			            </div>
-			        </div>
-			    </div>
-			</div>
-		</div>
-	</div>
-</div>
+                                <h5 class="modal-title">Large modal</h5>
+                            </div>
+                            <div class="modal-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque beatae accusantium maiores, placeat, quasi laborum in vitae
+                                accusamus veritatis inventore nulla et quibusdam debitis ipsam consectetur eum, velit ea
+                                praesentium! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum nostrum a velit
+                                esse est, voluptatum quam eos ipsum laudantium facere iusto. Provident deleniti non temporibus
+                                ex tenetur, assumenda labore eos!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { products } from './products';
+import {
+	GridDataResult,
+	PageChangeEvent
+} from '@progress/kendo-angular-grid';
 
 /**
 *	This class represents the lazy loaded HomeComponent.
@@ -8,7 +13,7 @@ import { Component } from '@angular/core';
 
 	selector: 'timeline-cmp',
 	templateUrl: './timeline.html',
-	
+
 })
 export class TimelineComponent { }
 
@@ -17,10 +22,10 @@ export class TimelineComponent { }
 	selector: 'chat-cmp',
 	templateUrl: './chat.html'
 })
-export class ChatComponent {}
+export class ChatComponent { }
 
 @Component({
-	
+
 	selector: 'notifications-cmp',
 	templateUrl: './notifications.html'
 })
@@ -30,6 +35,7 @@ export class NotificationComponent { }
 
 	selector: 'home-cmp',
 	templateUrl: './home.component.html'
+
 })
 
 
@@ -37,8 +43,19 @@ export class NotificationComponent { }
 
 export class HomeComponent {
 
+public listItems: Array<string> = ["Baseball", "Basketball", "Cricket", "Field Hockey", "Football", "Table Tennis", "Tennis", "Volleyball"];
+
+    public value = ['Basketball', 'Cricket']
 
 
+	private gridView: GridDataResult;
+	private pageSize: number = 10;
+	private skip: number = 0;
+	private gridData: any[] = products;
+	title = 'Hello World!';
+	onButtonClick() {
+		this.title = 'Hello from Kendo UI!';
+	}
 
 	/* Carousel Variable */
 	myInterval: number = 5000;
@@ -52,27 +69,42 @@ export class HomeComponent {
 	];
 	/* END */
 	/* Alert component */
-	public alerts:Array<Object> = [
-	   {
-	     type: 'danger',
-	     msg: 'Oh snap! Change a few things up and try submitting again.'
-	   },
-	   {
-	     type: 'success',
-	     msg: 'Well done! You successfully read this important alert message.',
-	     closable: true
-	   }
-	 ];
+	public alerts: Array<Object> = [
+		{
+			type: 'danger',
+			msg: 'Oh snap! Change a few things up and try submitting again.'
+		},
+		{
+			type: 'success',
+			msg: 'Well done! You successfully read this important alert message.',
+			closable: true
+		}
+	];
 
-	 public closeAlert(i:number):void {
-	   this.alerts.splice(i, 1);
-	 }
+	public closeAlert(i: number): void {
+		this.alerts.splice(i, 1);
+	}
 	/* END*/
 
 	constructor() {
+
+		this.loadProducts();
 		for (let i = 0; i < 4; i++) {
 			this.addSlide();
 		}
+	}
+
+
+	protected pageChange(event: PageChangeEvent): void {
+		this.skip = event.skip;
+		this.loadProducts();
+
+	}
+	private loadProducts(): void {
+		this.gridView = {
+			data: this.gridData.slice(this.skip, this.skip + this.pageSize),
+			total: this.gridData.length
+		};
 	}
 
 	/* Carousel */
