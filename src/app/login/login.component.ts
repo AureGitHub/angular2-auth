@@ -37,11 +37,11 @@ public model = new User(null,null,null,null,null,null);
     this.errorMessage ="";
     this.VerBoton = false;
 
-  this.router.navigate(['inicio']);
+  //this.router.navigate(['inicio']);
 
-  return;
+  //return;
 
-/*
+
     this.authService.login(this.model.username,this.model.password).subscribe(
     
        TodoOK=> {
@@ -49,7 +49,7 @@ public model = new User(null,null,null,null,null,null);
       if (this.authService.isLoggedIn) {
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
-        let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/inicio';
+        let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
 
         // Set our navigation extras object
         // that passes on our global query params and fragment
@@ -66,7 +66,7 @@ public model = new User(null,null,null,null,null,null);
       this.VerBoton = true;
       this.errorMessage = <any>error
     }
-    );*/
+    );
   }
 
  

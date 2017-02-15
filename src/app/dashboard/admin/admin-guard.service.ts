@@ -7,7 +7,7 @@ import {
   NavigationExtras,
   CanLoad, Route
 }                           from '@angular/router';
-import { AuthService }      from '../auth.service';
+import { AuthService }      from '../../auth.service';
 
 @Injectable()
 export class AdminGuard implements CanActivate, CanActivateChild, CanLoad {
@@ -25,7 +25,7 @@ export class AdminGuard implements CanActivate, CanActivateChild, CanLoad {
       
     }
 
-    if(this.authService.userConnect && this.authService.userConnect.esAdmin())
+    if(this.authService.userConnect && this.authService.isAdmin)
       return true;
 
     this.router.navigate(['/no-auth']);

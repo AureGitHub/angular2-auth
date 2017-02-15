@@ -4,9 +4,13 @@
 
 <div *ngIf="!this.authService.isLoggedIn" class="login-page">
 	<div class="row">
+	<button (click)="comoAdmin()" >como admin</button>
+	<button (click)="comoNoAdmin()" >como No admin</button>
+	</div>
+	<div class="row">
 		<div class="col-lg-4 col-lg-offset-4">
         	<img src="assets/img/SB-admin.png" width="150px" class="user-avatar" />
-			<h1>Euromillones TTEC</h1>
+			<h1>Euromillones DTTEC</h1>
 			<form role="form" (ngSubmit)="onSubmit()">
 				<div class="form-content">
 					<div class="form-group">

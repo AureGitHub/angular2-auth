@@ -3,11 +3,8 @@ import { AuthGuard }            from '../_guard/auth-guard.service';
 import { AuthService }          from '../auth.service';
 import { LoginComponent }       from './login.component';
 
-export const LoginRoutes: Route[] = [
-  	{
-    	path: '',
-    	component: LoginComponent
-  	}
+export const LoginRoutes: Route[] = [  
+	{ path: 'login',component: LoginComponent }
 ];
 
 

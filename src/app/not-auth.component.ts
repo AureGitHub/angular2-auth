@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: '<h2>No está autorizado para relalizar esta operación</h2>'
+  template: `<h2>No está autorizado para relalizar esta operación</h2>
+  <a routerLink="/" routerLinkActive="active">Home</a>    
+  `
+  
+
 })
-export class PageNotAuthComponent {}
+export class PageNotAuthComponent {
+
+
+}
 
 
 /*

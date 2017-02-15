@@ -1,14 +1,14 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { PrivadoComponent }     from './privado.component';
+import { AdminComponent }    from './admin.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [RouterModule,CommonModule,    
     ],
-    declarations: [PrivadoComponent],
-    exports: [PrivadoComponent]
+    declarations: [AdminComponent],
+    exports: [AdminComponent]
 })
 
-export class PrivadoModule { }
+export class AdminModule { }

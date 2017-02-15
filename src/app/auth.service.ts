@@ -22,10 +22,11 @@ private Url = 'https://euromillones-angular-node-auregithub.c9users.io/login';
 
  isLoggedIn:boolean = false;
 
+ isAdmin:boolean = false;
+
 
   // store the URL so we can redirect after logging in
   redirectUrl: string;
-
 
 constructor(private http: Http) {
  }
@@ -34,10 +35,12 @@ SetEntornoUser(){
     if(this.userConnect)
     {
        this.isLoggedIn = true;
+       this.isAdmin= this.userConnect.idRol==1;
       
     }
     else{
        this.isLoggedIn = false;
+       this.isAdmin=false;
       
     }
   
@@ -101,12 +104,14 @@ SetEntornoUser(){
       errMsg = error.message ? error.message : error.toString();
     }
    this.isLoggedIn = false;
+   this.isAdmin= false;
     return Observable.throw(errMsg);
   }
  
 
   logout(): void {
     this.isLoggedIn = false;
+    this.isAdmin= false;
     localStorage.removeItem(this.localStorage_currentUser);
     this.userConnect=null;
      this.SetEntornoUser();
