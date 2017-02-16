@@ -61,11 +61,15 @@ public listItems: Array<string> = ["Baseball", "Basketball", "Cricket", "Field H
 	myInterval: number = 5000;
 	index: number = 0;
 	slides: Array<any> = [];
+
+
+
+
 	imgUrl: Array<any> = [
-		`assets/img/slider1.jpg`,
-		`assets/img/slider2.jpg`,
-		`assets/img/slider3.jpg`,
-		`assets/img/slider0.jpg`
+		`../assets/img/slider1.jpg`,
+		`../assets/img/slider2.jpg`,
+		`../assets/img/slider3.jpg`,
+		`../assets/img/slider0.jpg`
 	];
 	/* END */
 	/* Alert component */

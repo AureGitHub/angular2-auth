@@ -7,21 +7,25 @@ import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { HomeComponent }     from './home.component';
 import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { CarouselModule } from 'ng2-bootstrap/ng2-bootstrap';
-/*
-import { ButtonsModule } from '@progress/kendo-angular-buttons';
+
 import { BrowserModule } from '@angular/platform-browser';
+
+//import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { GridModule } from '@progress/kendo-angular-grid';
-import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-*/ 
+//import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+
 @NgModule({
     imports: [RouterModule,CommonModule,BSComponentModule,
     AlertModule.forRoot(),
     ModalModule.forRoot(),
     CarouselModule.forRoot(),
-  /*  BrowserModule,
+    BrowserModule,
+    GridModule,
+  /*  
     GridModule,
     ButtonsModule,
-    DropDownsModule*/
+    DropDownsModule
+    */
     ],
     declarations: [HomeComponent],
     exports: [HomeComponent]
