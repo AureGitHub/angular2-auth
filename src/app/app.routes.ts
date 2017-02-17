@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 export const routes: Routes = [   
 	...LoginRoutes,
 	//...SignupRoutes,
+	{ path: '', component: DashboardComponent },
 	...DashboardRoutes,		
 	{ path: 'no-auth', component: PageNotAuthComponent },
 	{ path: '**', component: DashboardComponent },

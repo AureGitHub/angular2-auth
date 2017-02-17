@@ -50,6 +50,8 @@ SetEntornoUser(){
   let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
+
+
     return this.http
                .post(this.Url,JSON.stringify({username:username,password : password}),options)
                 .map((response: Response) => {
