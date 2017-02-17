@@ -10,6 +10,16 @@ import { BSComponentRoutes } from './bs-component/index';
 import { BSElementRoutes } from './bs-element/index';
 
 export const DashboardRoutes: Route[] = [
+	{		
+    	path: '',
+    	component: DashboardComponent,
+    	children: [
+			...HomeRoutes,
+	    	...PrivadoRoutes,
+			...AdminRoutes
+	    	
+    	]
+  	},
   	{		
     	path: 'dashboard',
     	component: DashboardComponent,
